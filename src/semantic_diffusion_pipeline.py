@@ -24,7 +24,6 @@ from diffusers.utils import (
 from transformers import CLIPImageProcessor, CLIPTextModel, CLIPTokenizer
 from transformers import AutoProcessor, BlipForConditionalGeneration
 
-from IPython.display import display
 logger = logging.get_logger(__name__)
 
 # import utils
@@ -32,8 +31,7 @@ from utils.parsing import get_attention_map_index_to_wordpiece, split_indices, c
 from utils.load_caption_model import load_model
 from utils.compute_loss import entropy_regularization, get_attention_map_index_to_wordpiece, split_indices, get_indices, start_token, end_token, align_wordpieces_indices, extract_attribution_indices, extract_attribution_indices_with_verbs, extract_attribution_indices_with_verb_root, extract_entities_only
 from utils.mi_estimator import MI_Maximizer, MI_Minimizer
-import matplotlib.pyplot as plt
-from PIL import Image
+
 import time
 from utils.arguments import parse_args
 
