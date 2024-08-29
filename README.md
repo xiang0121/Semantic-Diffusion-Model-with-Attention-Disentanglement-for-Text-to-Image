@@ -16,7 +16,6 @@ then download spaCy model
     python -m spacy download en_core_web_trf
 ```
 
-
 ## How to run
 ```
     python run.py --prompt "a cute fox wearing a graduation gown"
