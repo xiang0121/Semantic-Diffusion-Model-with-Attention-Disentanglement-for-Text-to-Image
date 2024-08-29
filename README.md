@@ -16,6 +16,10 @@ then download spaCy model
     python -m spacy download en_core_web_trf
 ```
 
+or you can install the required packages manually
+```
+    pip install -r requirements.txt
+```
 
 ## How to run
 ```
