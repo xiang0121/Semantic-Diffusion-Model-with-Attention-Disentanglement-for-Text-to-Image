@@ -5,6 +5,28 @@ import itertools
 start_token = "<|startoftext|>"
 end_token = "<|endoftext|>"
 
+def entropy_regularization(attention_maps, modifier, noun):
+    entropy = 0
+    
+    for i in range(len(attention_maps)):
+        if len(attention_maps[i].shape) > 1:
+            attention_maps[i] = attention_maps[i].reshape(-1)
+            attention_maps[i] = attention_maps[i].to(torch.float32)
+            attention_maps[i] = torch.clamp(attention_maps[i], min=0)
+            attention_maps[i] = attention_maps[i] / torch.sum(attention_maps[i])
+
+    if isinstance(noun, list):
+        for n in noun:
+            entropy += dist.Categorical(probs=attention_maps[n]).entropy()
+    else:
+        entropy = dist.Categorical(probs=attention_maps[noun]).entropy()
+    if isinstance(modifier, list):
+        for m in modifier:
+            entropy += dist.Categorical(probs=attention_maps[m]).entropy()
+    else:
+        entropy += dist.Categorical(probs=attention_maps[modifier]).entropy()
+    # print("entropy:", entropy)
+    return entropy
 
 def _get_outside_indices(subtree_indices, attn_map_idx_to_wp):
     flattened_subtree_indices = _flatten_indices(subtree_indices)
